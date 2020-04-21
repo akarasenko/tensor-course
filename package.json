@@ -1,0 +1,22 @@
+{
+  "name": "tensor-course",
+  "version": "1.0.0",
+  "description": "teensor course",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akarasenko/tensor-course.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akarasenko/tensor-course/issues"
+  },
+  "homepage": "https://github.com/akarasenko/tensor-course#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
