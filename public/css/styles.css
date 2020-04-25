@@ -1,0 +1,72 @@
+body {
+    font-size: 18px;
+    text-align: center;
+    font-family: Tahoma, arial, Georgia,  Serif;
+    width: 100%;
+}
+
+.p{
+    font-size: 1rem;
+}
+
+.logo{
+    height: 30px;
+    align-content: center; 
+    margin-right: 10px; 
+}
+
+header:hover img {
+    outline: 5px solid  red;
+    cursor: pointer;
+    position: relative;
+}
+
+#title{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+
+#line{
+    border-top:  solid black;
+    width: 100px;
+    display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.ava{
+    width: 170px; 
+    height: 170px; 
+    object-fit: cover; 
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.name{
+    width: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.university{
+    font-size: 0.75rem;
+    color: grey;
+    margin-top: 0;
+}
+
+.student{
+    width: 30%;
+    display: inline-block;
+    margin: 0.2rem;
+}
+
+.students {
+    max-width: 50%;
+    margin: 30 auto;
+}
+
+.info{
+    max-width: 50%;
+    margin: 30 auto;
+}
