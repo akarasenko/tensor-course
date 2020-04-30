@@ -4,6 +4,7 @@ body{
     font-family: sans-serif;
     margin: 0px;
     min-height: 100%;
+    font-size: 12px;
 }
 
 header{
@@ -13,6 +14,7 @@ header{
     align-content: center;
     background: #37ABFF;
     height: 10vh;
+    font-size: 24px;
 }
 
 header > div{
@@ -31,6 +33,7 @@ footer{
     align-content: center;
     background: #3C3C3C;
     height: 5vh;
+    font-size: 14px;
 }
 
 footer > div{
@@ -43,13 +46,13 @@ footer > div{
 }
 
 aside{
-    flex: 1 0 30%;
+    flex: 1 0 20%;
     background: #EDEDED;
-    min-height: 85vh;
+     font-size: 18px;
 }
 
 main{
-    flex: 1 0 70%;
+    flex: 1 0 80%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -68,59 +71,61 @@ aside > ul > li:hover{
 ul {
     margin-left: 0;
     padding-left: 0;
-   }
+}
 
 .lecture-card{
     box-shadow: 5px 5px 5px 5px #F3F3F3;
     margin: 20px;
     flex: none 20%;
-    width: 150px;
-    height: 250px;
+    width: 230px;
+    height: 340px;
     border-radius: 10px;
     border: 1px solid #D3D3D3;
 }
 
 .lecture-card__image{
     list-style-type: none;
-    height: 30%;
+    height: 120px;
     border-radius: 10px 10px 0px 0px;
-    background-image: url('../images/intro.png');
 }
 
 .lecture-card__description{
     list-style-type: none;
-    height: 55%;
+    height: 170px;
     background: #F3F3F3;
+    padding: 6px;
+}
+
+.lecture-card__description > p{
+    margin: 0px;
+    padding: 0px;
 }
 
 .lecture-card__button{
     list-style-type: none;
-    height: 15%;
+    height: 40px;
     background: #DCDCDC;
     border-radius: 0px 0px 10px 10px;
     color: #464646;
-    padding: 5px;
     text-align: center;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .lecture-card__name{
     font-weight: bold;
-    font-size: 100%;
-    margin: 5px;
+    font-size: 125%;
 }
 
 .lecture-card__date{
-    font-size: 50%;
+    font-size: 75%;
     color: #ABABAB;
-    margin: 5px;
 }
 
 .lecture-card__text{
-    font-size: 70%;
-    margin: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
-}
+ }
 
 @media all and (max-width:800px){
     main {flex: 1 100%};
