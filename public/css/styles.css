@@ -1,8 +1,11 @@
 body{
+    display: flex;
+    flex-flow: row wrap;
     font-family: sans-serif;
 }
 
 header{
+    flex: 1 100%;
     display: flex;
     flex-flow: row wrap;
     align-content: center;
@@ -19,12 +22,8 @@ header > div{
     flex-grow: 1;
 }
 
-main{
-    background-color: #FFFFFF;
-    height: 85%;
-}
-
 footer{
+    flex: 1 100%;
     display: flex;
     flex-flow: row wrap;
     align-content: center;
@@ -41,18 +40,13 @@ footer > div{
     flex-grow: 1;
 }
 
-main{
-    display: flex;
-    flex-flow: row wrap;
-}
-
-main > aside{
-    flex: 1 20%;
+aside{
+    flex: 1 30%;
     background: #EDEDED;
 }
 
-main > div{
-    flex: 1 80%;
+main{
+    flex: 3 70%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -116,3 +110,4 @@ ul {
     font-size: 75%;
     color: #ABABAB;
 }
+
