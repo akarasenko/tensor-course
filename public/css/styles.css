@@ -53,10 +53,13 @@ aside{
 
 main{
     flex: 1 0 80%;
+    min-height: 85vh;
+}
+
+.lecture-content{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    min-height: 85vh;
 }
 
 aside > ul> li {
@@ -123,6 +126,7 @@ ul {
 }
 
 .lecture-card__text{
+    height: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
  }
@@ -133,4 +137,22 @@ ul {
     main {order: 2;}
     aside {order: 3;}
     footer {order: 4;};
+}
+
+.main__button-more{
+    background: #37ABFF;
+    border-radius: 8px;
+    width: 248px;
+    height: 55px;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main__button-more > p{
+    text-align: center;
+    color: #FFFFFF;
+    padding: 17px;
+    font-size: 18px;
+    text-transform: uppercase;
 }
