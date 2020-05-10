@@ -74,3 +74,23 @@ header:hover img {
     max-width: 50%;
     margin: 30 auto;
 }
+
+.card{
+    width: 450px;
+    height: 250px;
+    background-color: #DCDCDC;
+    border: 2px solid #D3D3D3;
+    display: flex;
+    flex-direction: row;
+}
+
+.cardInfo{
+    flex: 1 1 60%;
+    margin: auto;
+}
+
+.cardAva{
+    flex: 1 1 40%;
+    margin: auto;
+    margin-right: 10px;
+}
