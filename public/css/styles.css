@@ -43,20 +43,24 @@ header:hover img {
 }
 
 .name{
-    width: 10px;
+    width: 200px;
+    height: 45px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .university{
+    width: 200px;
+    height: 65px;
     font-size: 0.75rem;
     color: grey;
     margin-top: 0;
 }
 
 .student{
-    width: 30%;
+    width: 200px;
+    height: 250px;
     display: inline-block;
     margin: 0.2rem;
 }
