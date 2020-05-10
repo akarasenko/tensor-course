@@ -21,12 +21,12 @@ header:hover img {
     position: relative;
 }
 
-#title{
+.title{
     font-size: 2.5rem;
     text-transform: uppercase;
 }
 
-#line{
+.line{
     border-top:  solid black;
     width: 100px;
     display: inline-block;
