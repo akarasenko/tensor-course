@@ -8,7 +8,9 @@ class Student {
     }
 
     get birthDateStr() {
-      return 'Дата рождения: ' + this.birthDate;
+      return 'Дата рождения: ' + this.birthDate.getDate() + '.'
+      + this.birthDate.getMonth() + '.' 
+      + this.birthDate.getFullYear();
     }
 
     get age() {
@@ -59,7 +61,7 @@ function appendStudentBlock(student)
  
     let name = createElementWithClassesText('div', ['name'], student.fullName);
 
-    let education = createElementWithClassesText('div', ['university'], student.education);
+    let education = createElementWithClassesText('div', ['additionalInfo'], student.education);
 
     item.appendChild(ava);
     item.appendChild(name);
@@ -78,10 +80,10 @@ function openCard(student, eventCurrentTarget){
     
     let info = createElementWithClassesText('div', ['cardInfo']);
 
-    let name = createElementWithClassesText('div', undefined, student.fullName);
-    let education = createElementWithClassesText('div', undefined, student.education);
-    let birthDate = createElementWithClassesText('div', undefined, student.birthDateStr);
-    let age = createElementWithClassesText('div', undefined, student.age);
+    let name = createElementWithClassesText('div', ['name'], student.fullName);
+    let education = createElementWithClassesText('div', ['additionalInfo'], student.education);
+    let birthDate = createElementWithClassesText('div', ['additionalInfo'], student.birthDateStr);
+    let age = createElementWithClassesText('div', ['additionalInfo'], student.age);
 
     info.appendChild(name);
     info.appendChild(education);
@@ -104,7 +106,7 @@ function openCard(student, eventCurrentTarget){
             birthDate: new Date(2000, 0, 1),
             photoUrl: '/images/avatars/ava1.jpg'
         },
- /*       {
+        {
             fullName: 'Саша',
             university: 'МГУ',
             course: 4,
@@ -138,7 +140,7 @@ function openCard(student, eventCurrentTarget){
             course: 5,
             birthDate: new Date(1999, 10, 11),
             photoUrl: '/images/avatars/ava6.jpg'
-        },*/
+        }
      ];
 
     studentArr.forEach((item) => {

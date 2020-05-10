@@ -43,16 +43,14 @@ header:hover img {
 }
 
 .name{
-    width: 200px;
-    height: 45px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.university{
-    width: 200px;
-    height: 65px;
+.additionalInfo{
     font-size: 0.75rem;
     color: grey;
     margin-top: 0;
