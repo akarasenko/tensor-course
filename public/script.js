@@ -76,7 +76,16 @@ function appendStudentBlock(student)
 
 function openCard(student, eventCurrentTarget){
 
+    let currentCloseButton = document.getElementsByClassName('close')[0];
+    if (currentCloseButton != undefined)
+    {
+        closeCard(currentCloseButton);
+    }
+
     let card = createElementWithClassesText('div', ['card']);
+
+    let closeButton = createElementWithClassesText('div', ['close']);
+    closeButton.addEventListener('click', (event) => closeCard(event.currentTarget));
     
     let info = createElementWithClassesText('div', ['cardInfo']);
 
@@ -92,10 +101,16 @@ function openCard(student, eventCurrentTarget){
 
     let ava = createImageWithClasses(['cardAva', 'ava'], student.photoUrl, student.name);
 
+    card.appendChild(closeButton);
     card.appendChild(info);
     card.appendChild(ava);
 
     document.body.appendChild(card);
+}
+
+function closeCard (element){
+    let card = element.parentNode;
+    card.parentNode.removeChild(card);
 }
 
     const studentArr = [

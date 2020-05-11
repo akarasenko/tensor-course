@@ -100,3 +100,27 @@ header:hover img {
     margin: auto;
     margin-right: 10px;
 }
+
+.close{
+    width: 20px;
+    height: 20px;;
+    position: absolute;
+    left: 430px;
+    display: inline-block;
+    background-color: #C0C0C0;
+}
+
+.close:before, .close:after {
+    position: absolute;
+    left: 10px;
+    content: ' ';
+    height: 20px;
+    width: 2px;
+    background-color: #333;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}
