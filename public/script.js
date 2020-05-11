@@ -103,7 +103,7 @@ function openCard(student, eventCurrentTarget){
             fullName: 'Маша',
             university: 'УГАТУ',
             course: 2,
-            birthDate: new Date(2000, 0, 1),
+            birthDate: new Date(2000, 02, 1),
             photoUrl: '/images/avatars/ava1.jpg'
         },
         {
