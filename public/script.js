@@ -1,9 +1,7 @@
-class Student {
-    constructor(param) {
+class Person {
+    constructor (param) {
         this.fullName = param.fullName;
         this.birthDate = param.birthDate;
-        this.university = param.university;
-        this.course = param.course;
         this.photoUrl = param.photoUrl;
     }
 
@@ -17,6 +15,14 @@ class Student {
         let now = new Date();
         return 'Возраст: ' + (now.getFullYear() - this.birthDate.getFullYear());
     }
+}
+
+class Student extends Person {
+    constructor(param) {
+        super(param);
+        this.university = param.university;
+        this.course = param.course;
+    }   
 
     get education() {
         return this.university + ' ' + this.course + ' курс';
@@ -97,6 +103,44 @@ class Student {
     }
 }
 
+class Teacher extends Person{
+    constructor(param)
+    {
+        super(param);
+        this.position = param.position;
+        this.subject = param.subject;
+    }
+}
+
+class PersonFactory{
+    createPerson(param)
+    {
+        return new Person(param);
+    }
+    createStudent(param)
+    {
+        return new Student(param);
+    }
+    createTeacher(param)
+    {
+        return new Teacher(param);
+    }
+
+    create (type, param)
+    {
+        let instanse;
+
+        switch(type){
+            case 'student': { instanse = this.createStudent(param); break;} 
+            case 'teacher': { instanse = this.createTeacher(param); break;}
+            default: { instanse = this.createPerson(param); break; }
+        }
+
+        return instanse;
+    }
+}
+
+
 function createElementWithClassesText(tagName, classNames, text) {
     let item = document.createElement(tagName);
 
@@ -143,32 +187,38 @@ const studentArr = [
         course: 4,
         birthDate: new Date(1994, 11, 31),
         photoUrl: '/images/avatars/ava3.jpg'
-    },
+    }];
+
+const teacherArr = [    
     {
-        fullName: 'Андрей',
-        university: 'УРФУ',
-        course: 3,
+        fullName: 'Андрей Иванович',
+        position: 'Frontend разрабтчик',
+        subject: 'Программирование на JavaScript',
         birthDate: new Date(2000, 07, 19),
         photoUrl: '/images/avatars/ava4.jpg'
     },
     {
-        fullName: 'Василий',
-        university: 'МГУ',
-        course: 3,
+        fullName: 'Василий Петрович',
+        position: 'Backend разрабтчик',
+        subject: 'Программирование на Java',
         birthDate: new Date(2001, 04, 14),
         photoUrl: '/images/avatars/ava5.jpg'
     },
     {
-        fullName: 'Кузя',
-        university: 'СПБГУ',
-        course: 5,
+        fullName: 'Кузьма Александрович',
+        position: 'Тестировщик',
+        subject: 'Тестирование',
         birthDate: new Date(1999, 10, 11),
         photoUrl: '/images/avatars/ava6.jpg'
     }
 ];
 
+const factory = new PersonFactory();
+
 studentArr.forEach((item) => {
-    const student = new Student(item);
-    const studentBlock = student.appendPreviewToDOM();
+    const student = factory.create('student', item);
+    const block = student.appendPreviewToDOM();
 });
+
+
 
