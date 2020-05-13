@@ -1,3 +1,29 @@
+function createElementWithClassesText(tagName, classNames, text) {
+    let item = document.createElement(tagName);
+
+    if (classNames != undefined) {
+        classNames.forEach(className => {
+            item.classList.add(className);
+        })
+    }
+
+    if (text != undefined) {
+        let innerText = document.createTextNode(text);
+        item.appendChild(innerText);
+    }
+
+    return item;
+}
+
+function createImageWithClasses(classNames, src, alt) {
+    let ava = createElementWithClassesText('img', classNames);
+    ava.setAttribute('src', src);
+    ava.setAttribute('alt', alt);
+
+    return ava;
+}
+//////////////////////////////////////////////////////////////////
+
 class Person {
     constructor (param) {
         this.type = param.type;
@@ -81,6 +107,31 @@ class Teacher extends Person{
     }
 }
 
+
+class School {
+    constructor(name) {
+        this.name = name;
+        this.factory = new PersonFactory();
+        this.list = [];
+    }
+
+    add (person) {
+        let personToAdd = this.factory.create(person);
+        this.list.push(personToAdd);
+    }
+
+    removeByName (name) {
+        this.list.filter(person => person.fullName != name);
+
+    }
+
+    getByName(name)
+    {
+        let a = this.list.filter(person => { return (person.fullName == name)})[0];
+        return a;
+    }
+}
+
 class PersonFactory{
     createPerson(param)
     {
@@ -105,6 +156,9 @@ class PersonFactory{
             default: { instanse = this.createPerson(param); break; }
         }
 
+        const preview = new Preview({type: 'personPreview'});
+        preview.appendPreviewToDOM(instanse);
+
         return instanse;
     }
 }
@@ -115,11 +169,11 @@ class Preview {
         this.type = param.type;
     }
 
-    renderPreview(type, person) 
+    renderPreview(person) 
     {
         let item = createElementWithClassesText('div', [person.type]);
 
-        if (type == 'personPreview')
+        if (this.type == 'personPreview')
         {        
             let ava = createImageWithClasses(['ava'], person.photoUrl, person.fullName);
 
@@ -136,7 +190,7 @@ class Preview {
     }
 
     appendPreviewToDOM(person) {
-        const layout = this.renderPreview('personPreview', person);
+        const layout = this.renderPreview(person);
 
         let students = document.getElementsByClassName("people")[0];
         students.appendChild(layout);
@@ -154,10 +208,10 @@ class Card {
         this.type = param.type;
     }
 
-    renderCard(type, person) {
+    renderCard(person) {
         let card = createElementWithClassesText('div', ['card']);
 
-        if (type == "personInfo")
+        if (this.type == "personInfo")
         {
             let closeButton = createElementWithClassesText('div', ['close']);
             closeButton.addEventListener('click', (event) => this.closeCard(event.currentTarget));
@@ -188,7 +242,7 @@ class Card {
                 }
         }
 
-        let card = this.renderCard(type, person);
+        let card = this.renderCard(person);
         document.body.appendChild(card);
     }
 
@@ -197,32 +251,6 @@ class Card {
         card.parentNode.removeChild(card);
     }
 
-}
-
-
-function createElementWithClassesText(tagName, classNames, text) {
-    let item = document.createElement(tagName);
-
-    if (classNames != undefined) {
-        classNames.forEach(className => {
-            item.classList.add(className);
-        })
-    }
-
-    if (text != undefined) {
-        let innerText = document.createTextNode(text);
-        item.appendChild(innerText);
-    }
-
-    return item;
-}
-
-function createImageWithClasses(classNames, src, alt) {
-    let ava = createElementWithClassesText('img', classNames);
-    ava.setAttribute('src', src);
-    ava.setAttribute('alt', alt);
-
-    return ava;
 }
 
 const peopleArr = [
@@ -276,13 +304,13 @@ const peopleArr = [
     }
 ];
 
-const factory = new PersonFactory();
+const school = new School('Курс программирования');
 
 peopleArr.forEach((item) => {
-    const person = factory.create(item);
-    const preview = new Preview({type: 'personPreview'});
-    preview.appendPreviewToDOM(person);
+    school.add (item);
 });
+
+let a = school.getByName('Маша');
 
 
 
