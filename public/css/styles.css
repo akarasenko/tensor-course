@@ -78,8 +78,6 @@ header:hover img {
     height: 250px;
     background-color: #DCDCDC;
     border: 2px solid #D3D3D3;
-    display: flex;
-    flex-direction: row;
 
      /*позиционируем и центрируем*/
     position: absolute;
@@ -90,7 +88,14 @@ header:hover img {
     margin: auto;
 }
 
-.cardInfo{
+.cardContent{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.personInfo{
     flex: 1 1 60%;
     margin: auto;
 }

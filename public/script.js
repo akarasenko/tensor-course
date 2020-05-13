@@ -16,33 +16,6 @@ class Person {
         let now = new Date();
         return 'Возраст: ' + (now.getFullYear() - this.birthDate.getFullYear());
     }
-
-    renderPreview() {
-        let item = createElementWithClassesText('div', [this.type]);
-        
-        let ava = createImageWithClasses(['ava'], this.photoUrl, this.fullName);
-
-        let name = createElementWithClassesText('div', ['name'], this.fullName);
-
-        let info = createElementWithClassesText('div', ['additionalInfo'], this.infoForPreview);
-
-        item.appendChild(ava);
-        item.appendChild(name);
-        item.appendChild(info);
-
-        return item;
-    }
-
-    appendPreviewToDOM() {
-        const layout = this.renderPreview();
-
-        let students = document.getElementsByClassName("people")[0];
-        students.appendChild(layout);
-
-        layout.addEventListener('click', (event) => {
-            this.openCard(this, event.currentTarget);
-        });
-    }
 }
 
 class Student extends Person {
@@ -60,14 +33,8 @@ class Student extends Person {
         return this.education;
     }
 
-
-    renderCard() {
-        let card = createElementWithClassesText('div', ['card']);
-
-        let closeButton = createElementWithClassesText('div', ['close']);
-        closeButton.addEventListener('click', (event) => this.closeCard(event.currentTarget));
-
-        let info = createElementWithClassesText('div', ['cardInfo']);
+    infoForCard() {
+        let info = createElementWithClassesText('div', ['personInfo']);
 
         let name = createElementWithClassesText('div', ['name'], this.fullName);
         let education = createElementWithClassesText('div', ['additionalInfo'], this.education);
@@ -79,33 +46,7 @@ class Student extends Person {
         info.appendChild(birthDate);
         info.appendChild(age);
 
-        let ava = createImageWithClasses(['cardAva', 'ava'], this.photoUrl, this.name);
-
-        card.appendChild(closeButton);
-        card.appendChild(info);
-        card.appendChild(ava);
-
-        return card;
-    }
-
-    openCard() 
-    {
-        let currentCards = document.getElementsByClassName('close');
-        if (currentCards.length != 0)
-        {
-            for (let card of currentCards) 
-                {
-                    this.closeCard(card);
-                }
-        }
-
-        let card = this.renderCard();
-        document.body.appendChild(card);
-    }
-
-    closeCard(element) {
-        let card = element.parentNode;
-        card.parentNode.removeChild(card);
+        return info;
     }
 }
 
@@ -123,6 +64,20 @@ class Teacher extends Person{
 
     get infoForPreview()  {
         return this.subjectToStr();
+    }
+
+    infoForCard() {
+        let info = createElementWithClassesText('div', ['personInfo']);
+
+        let name = createElementWithClassesText('div', ['name'], this.fullName);
+        let position = createElementWithClassesText('div', ['additionalInfo'], this.position);
+        let subject = createElementWithClassesText('div', ['additionalInfo'], this.subject);
+
+        info.appendChild(name);
+        info.appendChild(position);
+        info.appendChild(subject);
+
+        return info;
     }
 }
 
@@ -152,6 +107,96 @@ class PersonFactory{
 
         return instanse;
     }
+}
+
+class Preview {
+    constructor (param)
+    {
+        this.type = param.type;
+    }
+
+    renderPreview(type, person) 
+    {
+        let item = createElementWithClassesText('div', [person.type]);
+
+        if (type == 'personPreview')
+        {        
+            let ava = createImageWithClasses(['ava'], person.photoUrl, person.fullName);
+
+            let name = createElementWithClassesText('div', ['name'], person.fullName);
+
+            let info = createElementWithClassesText('div', ['additionalInfo'], person.infoForPreview);
+
+            item.appendChild(ava);
+            item.appendChild(name);
+            item.appendChild(info);
+        }
+
+        return item;
+    }
+
+    appendPreviewToDOM(person) {
+        const layout = this.renderPreview('personPreview', person);
+
+        let students = document.getElementsByClassName("people")[0];
+        students.appendChild(layout);
+
+        layout.addEventListener('click', (event) => {
+            let card = new Card({type:'personInfo'});
+            card.openCard(card.type, person);
+        });
+    }
+}
+
+class Card {
+    constructor(param)
+    {
+        this.type = param.type;
+    }
+
+    renderCard(type, person) {
+        let card = createElementWithClassesText('div', ['card']);
+
+        if (type == "personInfo")
+        {
+            let closeButton = createElementWithClassesText('div', ['close']);
+            closeButton.addEventListener('click', (event) => this.closeCard(event.currentTarget));
+
+            let content = createElementWithClassesText('div', ['cardContent']);
+
+            let info = person.infoForCard();
+            
+            let ava = createImageWithClasses(['cardAva', 'ava'], person.photoUrl, person.fullName);
+
+            content.appendChild(info);
+            content.appendChild(ava);
+
+            card.appendChild(closeButton);
+            card.appendChild(content);
+        }    
+        return card;
+    }
+
+    openCard(type, person) 
+    {
+        let currentCards = document.getElementsByClassName('close');
+        if (currentCards.length != 0)
+        {
+            for (let card of currentCards) 
+                {
+                    this.closeCard(card);
+                }
+        }
+
+        let card = this.renderCard(type, person);
+        document.body.appendChild(card);
+    }
+
+    closeCard(element) {
+        let card = element.parentNode;
+        card.parentNode.removeChild(card);
+    }
+
 }
 
 
@@ -235,7 +280,8 @@ const factory = new PersonFactory();
 
 peopleArr.forEach((item) => {
     const person = factory.create(item);
-    const block = person.appendPreviewToDOM();
+    const preview = new Preview({type: 'personPreview'});
+    preview.appendPreviewToDOM(person);
 });
 
 
