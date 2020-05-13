@@ -56,14 +56,14 @@ header:hover img {
     margin-top: 0;
 }
 
-.student{
+.student, .teacher {
     width: 200px;
     height: 250px;
     display: inline-block;
     margin: 0.2rem;
 }
 
-.students {
+.people {
     max-width: 50%;
     margin: 30 auto;
 }

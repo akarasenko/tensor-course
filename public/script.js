@@ -1,5 +1,6 @@
 class Person {
     constructor (param) {
+        this.type = param.type;
         this.fullName = param.fullName;
         this.birthDate = param.birthDate;
         this.photoUrl = param.photoUrl;
@@ -15,6 +16,33 @@ class Person {
         let now = new Date();
         return 'Возраст: ' + (now.getFullYear() - this.birthDate.getFullYear());
     }
+
+    renderPreview() {
+        let item = createElementWithClassesText('div', [this.type]);
+        
+        let ava = createImageWithClasses(['ava'], this.photoUrl, this.fullName);
+
+        let name = createElementWithClassesText('div', ['name'], this.fullName);
+
+        let info = createElementWithClassesText('div', ['additionalInfo'], this.infoForPreview);
+
+        item.appendChild(ava);
+        item.appendChild(name);
+        item.appendChild(info);
+
+        return item;
+    }
+
+    appendPreviewToDOM() {
+        const layout = this.renderPreview();
+
+        let students = document.getElementsByClassName("people")[0];
+        students.appendChild(layout);
+
+        layout.addEventListener('click', (event) => {
+            this.openCard(this, event.currentTarget);
+        });
+    }
 }
 
 class Student extends Person {
@@ -28,32 +56,10 @@ class Student extends Person {
         return this.university + ' ' + this.course + ' курс';
     }
 
-    renderPreview() {
-        let item = createElementWithClassesText('div', ['student']);
-
-        let ava = createImageWithClasses(['ava'], this.photoUrl, this.fullName);
-
-        let name = createElementWithClassesText('div', ['name'], this.fullName);
-
-        let education = createElementWithClassesText('div', ['additionalInfo'], this.education);
-
-        item.appendChild(ava);
-        item.appendChild(name);
-        item.appendChild(education);
-
-        return item;
+    get infoForPreview()  {
+        return this.education;
     }
 
-    appendPreviewToDOM() {
-        const layout = this.renderPreview();
-
-        let students = document.getElementsByClassName("students")[0];
-        students.appendChild(layout);
-
-        layout.addEventListener('click', (event) => {
-            this.openCard(this, event.currentTarget);
-        });
-    }
 
     renderCard() {
         let card = createElementWithClassesText('div', ['card']);
@@ -110,6 +116,14 @@ class Teacher extends Person{
         this.position = param.position;
         this.subject = param.subject;
     }
+
+    subjectToStr() {
+        return 'Куратор курса: ' + this.subject;
+    }
+
+    get infoForPreview()  {
+        return this.subjectToStr();
+    }
 }
 
 class PersonFactory{
@@ -126,11 +140,11 @@ class PersonFactory{
         return new Teacher(param);
     }
 
-    create (type, param)
+    create (param)
     {
         let instanse;
 
-        switch(type){
+        switch(param.type){
             case 'student': { instanse = this.createStudent(param); break;} 
             case 'teacher': { instanse = this.createTeacher(param); break;}
             default: { instanse = this.createPerson(param); break; }
@@ -166,8 +180,9 @@ function createImageWithClasses(classNames, src, alt) {
     return ava;
 }
 
-const studentArr = [
+const peopleArr = [
     {
+        type: 'student',
         fullName: 'Маша',
         university: 'УГАТУ',
         course: 2,
@@ -175,6 +190,7 @@ const studentArr = [
         photoUrl: '/images/avatars/ava1.jpg'
     },
     {
+        type: 'student',
         fullName: 'Саша',
         university: 'МГУ',
         course: 4,
@@ -182,15 +198,15 @@ const studentArr = [
         photoUrl: '/images/avatars/ava2.jpg'
     },
     {
+        type: 'student',
         fullName: 'Анатолий',
         university: 'МГУ',
         course: 4,
         birthDate: new Date(1994, 11, 31),
         photoUrl: '/images/avatars/ava3.jpg'
-    }];
-
-const teacherArr = [    
+    },
     {
+        type: 'teacher',
         fullName: 'Андрей Иванович',
         position: 'Frontend разрабтчик',
         subject: 'Программирование на JavaScript',
@@ -198,6 +214,7 @@ const teacherArr = [
         photoUrl: '/images/avatars/ava4.jpg'
     },
     {
+        type: 'teacher',
         fullName: 'Василий Петрович',
         position: 'Backend разрабтчик',
         subject: 'Программирование на Java',
@@ -205,6 +222,7 @@ const teacherArr = [
         photoUrl: '/images/avatars/ava5.jpg'
     },
     {
+        type: 'teacher',
         fullName: 'Кузьма Александрович',
         position: 'Тестировщик',
         subject: 'Тестирование',
@@ -215,9 +233,9 @@ const teacherArr = [
 
 const factory = new PersonFactory();
 
-studentArr.forEach((item) => {
-    const student = factory.create('student', item);
-    const block = student.appendPreviewToDOM();
+peopleArr.forEach((item) => {
+    const person = factory.create(item);
+    const block = person.appendPreviewToDOM();
 });
 
 
