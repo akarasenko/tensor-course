@@ -121,14 +121,13 @@ class School {
     }
 
     removeByName (name) {
-        this.list.filter(person => person.fullName != name);
+        this.list = this.list.filter(person => person.fullName != name);
 
     }
 
     getByName(name)
     {
-        let a = this.list.filter(person => { return (person.fullName == name)})[0];
-        return a;
+        return this.list.filter(person => { return (person.fullName == name)})[0];
     }
 }
 
@@ -310,7 +309,6 @@ peopleArr.forEach((item) => {
     school.add (item);
 });
 
-let a = school.getByName('Маша');
 
 
 
