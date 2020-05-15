@@ -97,7 +97,7 @@ class Teacher extends Person{
 
         let name = createElementWithClassesText('div', ['name'], this.fullName);
         let position = createElementWithClassesText('div', ['additionalInfo'], this.position);
-        let subject = createElementWithClassesText('div', ['additionalInfo'], this.subject);
+        let subject = createElementWithClassesText('div', ['additionalInfo'], this.subjectToStr());
 
         info.appendChild(name);
         info.appendChild(position);
