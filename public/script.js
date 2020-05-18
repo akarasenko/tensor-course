@@ -51,19 +51,15 @@ class Student extends Person {
         this.course = param.course;
     }   
 
-    get education() {
-        return this.university + ' ' + this.course + ' курс';
-    }
-
     get infoForPreview()  {
-        return this.education;
+        return this.university + ' ' + this.course + ' курс';
     }
 
     infoForCard() {
         let info = createElementWithClassesText('div', ['personInfo']);
 
         let name = createElementWithClassesText('div', ['name'], this.fullName);
-        let education = createElementWithClassesText('div', ['additionalInfo'], this.education);
+        let education = createElementWithClassesText('div', ['additionalInfo'], this.infoForPreview);
         let birthDate = createElementWithClassesText('div', ['additionalInfo'], this.birthDateStr);
         let age = createElementWithClassesText('div', ['additionalInfo'], this.age);
 
@@ -84,12 +80,8 @@ class Teacher extends Person{
         this.subject = param.subject;
     }
 
-    subjectToStr() {
-        return 'Куратор курса: ' + this.subject;
-    }
-
     get infoForPreview()  {
-        return this.subjectToStr();
+        return 'Куратор курса: ' + this.subject;
     }
 
     infoForCard() {
@@ -97,7 +89,7 @@ class Teacher extends Person{
 
         let name = createElementWithClassesText('div', ['name'], this.fullName);
         let position = createElementWithClassesText('div', ['additionalInfo'], this.position);
-        let subject = createElementWithClassesText('div', ['additionalInfo'], this.subjectToStr());
+        let subject = createElementWithClassesText('div', ['additionalInfo'], this.infoForPreview);
 
         info.appendChild(name);
         info.appendChild(position);
@@ -111,12 +103,11 @@ class Teacher extends Person{
 class School {
     constructor(name) {
         this.name = name;
-        this.factory = new PersonFactory();
         this.list = [];
     }
 
     add (person) {
-        let personToAdd = this.factory.create(person);
+        let personToAdd = PersonFactory.create(person);
         this.list.push(personToAdd);
     }
 
@@ -132,20 +123,20 @@ class School {
 }
 
 class PersonFactory{
-    createPerson(param)
+    static createPerson(param)
     {
         return new Person(param);
     }
-    createStudent(param)
+    static createStudent(param)
     {
         return new Student(param);
     }
-    createTeacher(param)
+    static createTeacher(param)
     {
         return new Teacher(param);
     }
 
-    create (param)
+    static create (param)
     {
         let instanse;
 
