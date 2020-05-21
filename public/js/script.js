@@ -46,7 +46,7 @@ const peopleArr = [
         type: 'teacher',
         fullName: 'Кузьма Александрович',
         position: 'Тестировщик',
-        subject: 'Тестирование',
+        subject: 'Тестирование программного обеспечения',
         birthDate: new Date(1999, 10, 11),
         photoUrl: '/images/avatars/ava6.jpg'
     }

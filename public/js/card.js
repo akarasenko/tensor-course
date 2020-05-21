@@ -15,7 +15,7 @@ export class Card extends Component{
                     <div class = "name" title="${this.data.fullName}">${this.data.fullName}</div>
                     <div class = "additionalInfo" title="${this.data.infoForPreview}">${this.data.infoForPreview}</div>
                 </div>
-                <img class = "avaCard ava" src = "${this.data.photoUrl}" alt = "${this.data.name}">
+                <img class = "cardAva ava" src = "${this.data.photoUrl}" alt = "${this.data.name}">
             </div>
         </div>`;
 

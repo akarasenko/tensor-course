@@ -9,7 +9,7 @@ export class Preview extends Component{
 
     render() 
     {
-        return  `<div class = "${this.data.type} info">
+        return  `<div class = "${this.data.type}">
             <img class = "ava" src = "${this.data.photoUrl}" alt = "${this.data.name}">
             <div class = "name" title="${this.data.fullName}">${this.data.fullName}</div>
             <div class = "additionalInfo" title="${this.data.infoForPreview}">${this.data.infoForPreview}</div>
