@@ -1,41 +1,28 @@
-import {createElementWithClassesText, createImageWithClasses} from './helper.js'
 import {Card} from './card.js'
+import {Component} from './component.js'
 
-export class Preview {
+export class Preview extends Component{
     constructor (param)
     {
-        this.type = param.type;
+        super(param);
     }
 
-    renderPreview(person) 
+    render() 
     {
-        let item = createElementWithClassesText('div', [person.type]);
-
-        if (this.type == 'personPreview')
-        {        
-            let ava = createImageWithClasses(['ava'], person.photoUrl, person.fullName);
-
-            let name = createElementWithClassesText('div', ['name'], person.fullName);
-
-            let info = createElementWithClassesText('div', ['additionalInfo'], person.infoForPreview);
-
-            item.appendChild(ava);
-            item.appendChild(name);
-            item.appendChild(info);
-        }
-
-        return item;
+        return  `<div class = "${this.data.type} info">
+            <img class = "ava" src = "${this.data.photoUrl}" alt = "${this.data.name}">
+            <div class = "name" title="${this.data.fullName}">${this.data.fullName}</div>
+            <div class = "additionalInfo" title="${this.data.infoForPreview}">${this.data.infoForPreview}</div>
+        </div>`;
     }
 
-    appendPreviewToDOM(person) {
-        const layout = this.renderPreview(person);
-
-        let students = document.getElementsByClassName("people")[0];
-        students.appendChild(layout);
-
-        layout.addEventListener('click', (event) => {
-            let card = new Card({type:'personInfo'});
-            card.openCard(card.type, person);
-        });
+    afterMount()
+    {
+        this.component.addEventListener('click', (event) => 
+        {
+            let card = new Card(this.data);
+            
+            card.mount(document.body);
+        })
     }
 }

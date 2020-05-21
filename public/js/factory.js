@@ -25,8 +25,11 @@ export class Factory{
             default: { instanse = this.createPerson(param); break; }
         }
 
-        const preview = new Preview({type: 'personPreview'});
-        preview.appendPreviewToDOM(instanse);
+        const preview = new Preview(instanse);
+
+        let peopleBlock = document.getElementsByClassName("people")[0];
+       
+        preview.mount(peopleBlock);
 
         return instanse;
     }

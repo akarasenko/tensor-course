@@ -1,52 +1,46 @@
-import {createElementWithClassesText, createImageWithClasses} from './helper.js';
+import {Component} from './component.js'
 
-export class Card {
+export class Card extends Component{
     constructor(param)
     {
-        this.type = param.type;
+        super(param);
     }
 
-    renderCard(person) {
-        let card = createElementWithClassesText('div', ['card']);
+    render() {
 
-        if (this.type == "personInfo")
-        {
-            let closeButton = createElementWithClassesText('div', ['close']);
-            closeButton.addEventListener('click', (event) => this.closeCard(event.currentTarget));
+        return `<div class = 'card'>
+            <div class = 'close'></div>
+            <div class = 'cardContent'>
+                <div class = 'personInfo'>
+                    <div class = "name" title="${this.data.fullName}">${this.data.fullName}</div>
+                    <div class = "additionalInfo" title="${this.data.infoForPreview}">${this.data.infoForPreview}</div>
+                </div>
+                <img class = "avaCard ava" src = "${this.data.photoUrl}" alt = "${this.data.name}">
+            </div>
+        </div>`;
 
-            let content = createElementWithClassesText('div', ['cardContent']);
-
-            let info = person.infoForCard();
-            
-            let ava = createImageWithClasses(['cardAva', 'ava'], person.photoUrl, person.fullName);
-
-            content.appendChild(info);
-            content.appendChild(ava);
-
-            card.appendChild(closeButton);
-            card.appendChild(content);
-        }    
-        return card;
     }
 
-    openCard(type, person) 
+    beforeMount()
     {
-        let currentCards = document.getElementsByClassName('close');
+        let currentCards = document.querySelectorAll('.card');
         if (currentCards.length != 0)
         {
             for (let card of currentCards) 
                 {
-                    this.closeCard(card);
+                    card.remove();
                 }
         }
-
-        let card = this.renderCard(person);
-        document.body.appendChild(card);
     }
 
-    closeCard(element) {
-        let card = element.parentNode;
-        card.parentNode.removeChild(card);
-    }
+    afterMount()
+    {
+        let closeButtom = this.component.querySelector('.close');
 
+        closeButtom.addEventListener('click', event => 
+        {
+            this.component.remove();
+            this.component = undefined;
+        })
+    }
 }

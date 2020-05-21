@@ -1,3 +1,4 @@
+
 import {School} from './school.js';
 
 const peopleArr = [
