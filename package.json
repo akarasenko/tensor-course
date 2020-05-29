@@ -4,7 +4,8 @@
   "description": "teensor course",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "node server.js",
+    "test": "mocha ./public/test/test.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/akarasenko/tensor-course#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "chai": "^4.2.0",
+    "express": "^4.17.1",
+    "mocha": "^7.2.0"
   }
 }
