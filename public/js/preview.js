@@ -2,18 +2,20 @@ import {Card} from './card.js'
 import {Component} from './component.js'
 
 export class Preview extends Component{
-    constructor (param)
+    constructor (props)
     {
-        super(param);
+        super(props);
     }
 
     render() 
     {
-        return  `<div class = "${this.data.type}">
-            <img class = "ava" src = "${this.data.photoUrl}" alt = "${this.data.name}">
-            <div class = "name" title="${this.data.fullName}">${this.data.fullName}</div>
-            <div class = "additionalInfo" title="${this.data.infoForPreview}">${this.data.infoForPreview}</div>
-        </div>`;
+        return (
+        <div class = {this.state.type}>
+            <img class = "ava" src = {this.state.photoUrl} alt = {this.state.name}></img>
+            <div class = "name" title={this.state.fullName}>${this.state.fullName}</div>
+            <div class = "additionalInfo" title={this.state.infoForPreview}>{this.state.infoForPreview}</div>
+        </div>
+        );
     }
 
     afterMount()
