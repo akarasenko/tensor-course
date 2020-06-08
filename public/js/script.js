@@ -12,7 +12,7 @@ let header = new Header();
 header.render();
 
 let infoHeader = document.querySelector('.info');
-header.mount(infoHeader);
+header.mount(headerHtml);
 
 const peopleArr = [
     {
