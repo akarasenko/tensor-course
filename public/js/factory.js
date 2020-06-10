@@ -25,11 +25,11 @@ export class Factory{
             default: { instanse = this.createPerson(param); break; }
         }
 
-        const preview = new Preview(instanse);
+//        const preview = new Preview(instanse);
 
-        let peopleBlock = document.getElementsByClassName("people")[0];
+//        let peopleBlock = document.getElementsByClassName("people")[0];
        
-        preview.mount(peopleBlock);
+//        preview.mount(peopleBlock);
 
         return instanse;
     }

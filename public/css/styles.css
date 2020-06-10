@@ -74,13 +74,13 @@ header:hover img {
     background-color: #DCDCDC;
     border: 2px solid #D3D3D3;
 
-     /*позиционируем и центрируем*/
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
+    /*позиционируем и центрируем*/
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+margin: auto;
 }
 
 .cardContent{

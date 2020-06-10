@@ -1,26 +1,29 @@
-export class Component{
+export class Component extends React.Component{
     constructor (param)
     {
+        super(param);
         this.data = param;
-        this.component = undefined; // это содержимое компонента, html элемент
+        this.component = undefined;
     }
 
     render() {
-        return '<div></div>';
+        this.component = ReactDOM.createElement('div');
     }
 
-    mount(container, position)
+    mount(container)
     {
         this.beforeMount()
 
-        let componentTHML = this.render();
+        this.render();
 
-        let vsContainer = document.createElement('div');
-        vsContainer.innerHTML = componentTHML;
-        this.component = vsContainer.firstElementChild;
+//        let vsContainer = document.createElement('div');
+//        vsContainer.innerHTML = componentTHML;
+//        this.component = vsContainer.firstElementChild;
          
-        container.insertAdjacentElement(position || 'beforeend', this.component);
+//        container.insertAdjacentElement(position || 'beforeend', this.component);
 
+
+        ReactDOM.render(this.component, container);
         this.afterMount()
     }
 
