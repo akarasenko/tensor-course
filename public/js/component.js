@@ -2,7 +2,7 @@ export class Component extends React.Component{
     constructor (param)
     {
         super(param);
-        this.data = param;
+//        this.data = param;
         this.component = undefined;
     }
 

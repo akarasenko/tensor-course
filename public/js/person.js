@@ -1,5 +1,6 @@
 export class Person {
     constructor (param) {
+        this.id = param.id;
         this.type = param.type;
         this.fullName = param.fullName;
         this.birthDate = param.birthDate;

@@ -1,6 +1,7 @@
 import {Component} from './component.js';
 import {Factory} from './factory.js';
 import {Preview} from './preview.js';
+import { Card } from './card.js';
 
 export class Previews extends Component{
     constructor(param)
